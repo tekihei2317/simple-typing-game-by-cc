@@ -1,35 +1,64 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import StartScreen from "./components/StartScreen";
+import TypingScreen from "./components/TypingScreen";
+import ResultScreen from "./components/ResultScreen";
+import Navigation from "./components/Navigation";
+import { words } from "./data/words";
+
+type GameState = "start" | "playing" | "result";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [gameState, setGameState] = useState<GameState>("start");
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [currentInput, setCurrentInput] = useState("");
+
+  const handleStart = () => {
+    setGameState("playing");
+    setCurrentWordIndex(0);
+    setCurrentInput("");
+  };
+
+  const handleRetry = () => {
+    setGameState("start");
+    setCurrentWordIndex(0);
+    setCurrentInput("");
+  };
+
+  const handleStateChange = (state: GameState) => {
+    setGameState(state);
+    if (state === "start") {
+      setCurrentWordIndex(0);
+      setCurrentInput("");
+    }
+  };
+
+  const currentWord = words[currentWordIndex];
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Navigation currentState={gameState} onStateChange={handleStateChange} />
+      
+      {gameState === "start" && <StartScreen onStart={handleStart} />}
+      
+      {gameState === "playing" && (
+        <TypingScreen
+          currentWord={currentWord}
+          currentIndex={currentWordIndex}
+          totalWords={words.length}
+          currentInput={currentInput}
+        />
+      )}
+      
+      {gameState === "result" && (
+        <ResultScreen
+          totalTime={120}
+          accuracy={95.5}
+          wpm={45}
+          onRetry={handleRetry}
+        />
+      )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
