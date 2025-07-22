@@ -44,7 +44,9 @@ export default function ResultScreen({
           <h1 className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 mb-4 animate-pulse">
             RESULT
           </h1>
-          <p className={`text-2xl font-bold bg-gradient-to-r ${getScoreColor(accuracy)} bg-clip-text text-transparent`}>
+          <p
+            className={`text-2xl font-bold bg-gradient-to-r ${getScoreColor(accuracy)} bg-clip-text text-transparent`}
+          >
             {getScoreMessage(accuracy)}
           </p>
         </div>
@@ -69,7 +71,9 @@ export default function ResultScreen({
             <div className="flex items-center justify-between">
               <div className="text-left">
                 <p className="text-slate-300 text-lg">正解率</p>
-                <p className={`text-3xl font-bold bg-gradient-to-r ${getScoreColor(accuracy)} bg-clip-text text-transparent`}>
+                <p
+                  className={`text-3xl font-bold bg-gradient-to-r ${getScoreColor(accuracy)} bg-clip-text text-transparent`}
+                >
                   {accuracy.toFixed(1)}%
                 </p>
               </div>

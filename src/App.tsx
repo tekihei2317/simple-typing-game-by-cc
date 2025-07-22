@@ -4,56 +4,66 @@ import TypingScreen from "./components/TypingScreen";
 import ResultScreen from "./components/ResultScreen";
 import Navigation from "./components/Navigation";
 import { words } from "./data/words";
+import { useTypingGame } from "./hooks/useTypingGame";
 
 type GameState = "start" | "playing" | "result";
 
 function App() {
-  const [gameState, setGameState] = useState<GameState>("start");
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [currentInput, setCurrentInput] = useState("");
+  const [viewState, setViewState] = useState<GameState>("start");
+  const typingGame = useTypingGame(words.slice(0, 2));
 
   const handleStart = () => {
-    setGameState("playing");
-    setCurrentWordIndex(0);
-    setCurrentInput("");
+    typingGame.startGame();
+    setViewState("playing");
   };
 
   const handleRetry = () => {
-    setGameState("start");
-    setCurrentWordIndex(0);
-    setCurrentInput("");
+    typingGame.resetGame();
+    setViewState("start");
   };
 
   const handleStateChange = (state: GameState) => {
-    setGameState(state);
-    if (state === "start") {
-      setCurrentWordIndex(0);
-      setCurrentInput("");
-    }
+    setViewState(state);
   };
 
-  const currentWord = words[currentWordIndex];
+  // ゲーム状態と表示状態を同期
+  const currentGameState = typingGame.isPlaying
+    ? "playing"
+    : typingGame.isFinished
+      ? "result"
+      : "start";
+
+  const displayState =
+    viewState === "start" && typingGame.isFinished
+      ? "result"
+      : currentGameState;
 
   return (
     <>
-      <Navigation currentState={gameState} onStateChange={handleStateChange} />
-      
-      {gameState === "start" && <StartScreen onStart={handleStart} />}
-      
-      {gameState === "playing" && (
+      <Navigation
+        currentState={displayState}
+        onStateChange={handleStateChange}
+      />
+
+      {displayState === "start" && <StartScreen onStart={handleStart} />}
+
+      {displayState === "playing" && (
         <TypingScreen
-          currentWord={currentWord}
-          currentIndex={currentWordIndex}
-          totalWords={words.length}
-          currentInput={currentInput}
+          currentWord={{
+            display: typingGame.currentState.displayText,
+            reading: typingGame.currentState.readingText,
+          }}
+          currentIndex={typingGame.currentWordIndex}
+          totalWords={typingGame.totalWords}
+          currentInput={typingGame.currentState.romanTyped}
         />
       )}
-      
-      {gameState === "result" && (
+
+      {displayState === "result" && (
         <ResultScreen
-          totalTime={120}
-          accuracy={95.5}
-          wpm={45}
+          totalTime={typingGame.results.totalTime}
+          accuracy={typingGame.results.accuracy}
+          wpm={typingGame.results.wpm}
           onRetry={handleRetry}
         />
       )}

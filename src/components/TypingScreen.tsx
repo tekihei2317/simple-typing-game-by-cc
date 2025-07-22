@@ -34,7 +34,7 @@ export default function TypingScreen({
             </span>
           </div>
           <div className="w-full bg-slate-700 rounded-full h-3 overflow-hidden">
-            <div 
+            <div
               className="h-full bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full transition-all duration-500 ease-out"
               style={{ width: `${progress}%` }}
             ></div>
@@ -56,16 +56,17 @@ export default function TypingScreen({
         {/* 入力エリア */}
         <div className="mb-8">
           <div className="bg-slate-800/70 backdrop-blur-sm border-2 border-cyan-500/30 rounded-xl p-6 text-left max-w-2xl mx-auto shadow-2xl">
-            <div className="flex items-center">
-              <span className="text-2xl font-mono text-cyan-400 mr-1">
-                {currentInput}
-              </span>
-              <span className="text-2xl font-mono text-cyan-400 animate-pulse">
-                |
-              </span>
+            <div className="flex items-center text-2xl font-mono">
+              {/* 入力済み文字（緑色） */}
+              <span className="text-green-400">{currentInput}</span>
+              {/* カーソル */}
+              <span className="text-cyan-400 animate-pulse">|</span>
             </div>
-            <div className="mt-2 text-sm text-slate-400">
+            <div className="mt-3 text-sm text-slate-400">
               ローマ字で入力してください
+            </div>
+            <div className="mt-1 text-xs text-slate-500">
+              Space キーでスタート
             </div>
           </div>
         </div>

@@ -10,13 +10,11 @@ export default function StartScreen({ onStart }: StartScreenProps) {
           <h1 className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 mb-4 tracking-tight">
             タイピング
           </h1>
-          <h2 className="text-4xl font-bold text-white opacity-90">
-            ゲーム
-          </h2>
+          <h2 className="text-4xl font-bold text-white opacity-90">ゲーム</h2>
           <div className="absolute -top-2 -right-4 w-4 h-4 bg-yellow-400 rounded-full animate-pulse"></div>
           <div className="absolute top-8 -left-6 w-3 h-3 bg-pink-400 rounded-full animate-bounce delay-300"></div>
         </div>
-        
+
         <div className="space-y-6">
           <button
             onClick={onStart}
@@ -25,9 +23,13 @@ export default function StartScreen({ onStart }: StartScreenProps) {
             <span className="relative z-10">START GAME</span>
             <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-purple-600 rounded-xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
           </button>
-          
+
           <p className="text-gray-300 text-sm">
-            Press <kbd className="px-2 py-1 bg-gray-700 rounded font-mono text-xs">SPACE</kbd> to begin
+            Press{" "}
+            <kbd className="px-2 py-1 bg-gray-700 rounded font-mono text-xs">
+              SPACE
+            </kbd>{" "}
+            to begin
           </p>
         </div>
       </div>
