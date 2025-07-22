@@ -2,7 +2,6 @@ import { useState } from "react";
 import StartScreen from "./components/StartScreen";
 import TypingScreen from "./components/TypingScreen";
 import ResultScreen from "./components/ResultScreen";
-import Navigation from "./components/Navigation";
 import { words } from "./data/words";
 import { useTypingGame } from "./hooks/useTypingGame";
 
@@ -10,7 +9,7 @@ type GameState = "start" | "playing" | "result";
 
 function App() {
   const [viewState, setViewState] = useState<GameState>("start");
-  const typingGame = useTypingGame(words.slice(0, 2));
+  const typingGame = useTypingGame(words.slice(0, 1));
 
   const handleStart = () => {
     typingGame.startGame();
@@ -20,10 +19,6 @@ function App() {
   const handleRetry = () => {
     typingGame.resetGame();
     setViewState("start");
-  };
-
-  const handleStateChange = (state: GameState) => {
-    setViewState(state);
   };
 
   // ゲーム状態と表示状態を同期
@@ -40,11 +35,6 @@ function App() {
 
   return (
     <>
-      <Navigation
-        currentState={displayState}
-        onStateChange={handleStateChange}
-      />
-
       {displayState === "start" && <StartScreen onStart={handleStart} />}
 
       {displayState === "playing" && (

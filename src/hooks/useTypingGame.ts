@@ -127,7 +127,7 @@ export function useTypingGame(words: WordData[]) {
 
       return result;
     },
-    [gameState.isPlaying, gameState.currentWord, nextWord],
+    [gameState.isPlaying, gameState.currentWord, nextWord]
   );
 
   // キーボードイベントリスナー
@@ -207,12 +207,11 @@ export function useTypingGame(words: WordData[]) {
         ? (stats.correctKeystrokes / stats.totalKeystrokes) * 100
         : 0;
 
-    // WPM計算（文字数ベース）
-    const totalChars = words.reduce(
-      (sum, word) => sum + word.reading.length,
-      0,
-    );
-    const wpm = totalTime > 0 ? Math.round((totalChars / totalTime) * 60) : 0;
+    // WPM計算
+    const wpm =
+      totalTime > 0
+        ? Math.round((stats.correctKeystrokes / totalTime) * 60)
+        : 0;
 
     return {
       totalTime,
