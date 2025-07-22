@@ -1,10 +1,10 @@
 # 実装計画
 
-- [ ] プロジェクトのセットアップ
-  - [ ] React+Viteプロジェクト作成
-  - [ ] Tailwind CSS設定
-  - [ ] ESLint/Prettier設定
-  - [ ] higgsinoライブラリインストール
+- [x] プロジェクトのセットアップ
+  - [x] React+Viteプロジェクト作成
+  - [x] Tailwind CSS設定
+  - [x] ESLint/Prettier設定
+  - [x] higgsinoライブラリインストール
 - [ ] 画面のモックアップをReact + Tailwind CSSで作成する
   - [ ] スタート画面のデザイン作成
   - [ ] タイピング画面のレイアウト作成
