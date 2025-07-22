@@ -9,7 +9,7 @@ type GameState = "start" | "playing" | "result";
 
 function App() {
   const [viewState, setViewState] = useState<GameState>("start");
-  const typingGame = useTypingGame(words.slice(0, 1));
+  const typingGame = useTypingGame(words.slice(0, 15));
 
   const handleStart = () => {
     typingGame.startGame();

@@ -28,7 +28,7 @@ WPMが実際より低くなる不具合がおそらくあります。
   - [x] 正確率計算
   - [x] 結果画面の表示
   - [x] リトライ機能
-- [ ] Cloudflare Workersにデプロイする
-  - [ ] ビルド設定の確認
-  - [ ] Cloudflare Workers設定
-  - [ ] デプロイテスト
+- [x] Cloudflare Workersにデプロイする
+  - [x] ビルド設定の確認
+  - [x] Cloudflare Workers設定
+  - [x] デプロイテスト
